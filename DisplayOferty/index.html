@@ -11,24 +11,43 @@
 
 	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type='text/javascript' src='knockout-3.4.1.js'></script>
 
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="myscript.js"></script>
+	<script type='text/javascript' src='application.js'></script>
 	<title>Displayer</title>
 	</head>
 <body>
-	<div class="container-fluid">
+	<div class="container">
 		<h2>oferty</h2>
-		<div>
-			test mój
+		<div class="row" data-bind="foreach: oferts">
+			<div class="col-sm-4 oferta">
+				<h3 data-bind="text: name"></h3>
+				<div class="dane">
+					<span class="tytul">Nr oferty: </span>
+					<span class="texting">Ofpr/34.3443</span>
+				</div>
+				<div class="dane">
+					<span class="tytul">Kod zawodu: </span>
+					<span class="texting" data-bind="text: zawod">54478</span>
+				</div>
+				<div class="dane">
+					<span class="tytul">Wymagania: </span>
+					<span class="texting">brak</span>
+				</div>
+				<div class="dane">
+					<span class="tytul">Wynagrodzenie: </span>
+					<span class="texting">1800 zł</span>
+				</div>
+			</div>
 		</div>
-		<div class="row">
-			<div class="col-sm-4">
-			first
-			</div>
-			<div class="col-sm-8">
-			2222
-			</div>
+	</div>
+	<p>The day of the week is <span data-bind="text: dayOfWeek"></span>.</p>
+	<div data-bind="foreach: oferts">
+		<div>
+			<span>dddd</span>
 		</div>
 	</div>
 </body>

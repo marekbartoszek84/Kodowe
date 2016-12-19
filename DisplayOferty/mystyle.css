@@ -1,6 +1,11 @@
-body{
-	background-color: lightbule;
-}
+
 h2{
 color: blue;
+}
+.oferta{
+	border:solid 1px black;
+	
+}
+.tytul{
+	font-weight: bold;
 }
