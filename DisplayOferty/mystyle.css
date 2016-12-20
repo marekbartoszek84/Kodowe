@@ -9,3 +9,7 @@ color: blue;
 .tytul{
 	font-weight: bold;
 }
+
+.hideOfert{
+	display:none;
+}

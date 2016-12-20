@@ -5,16 +5,14 @@ $(document).ready(function(){
     self.zawod = zawod;
 }
   function viewModel() {
-
+      let self=this;
      this.dayOfWeek = ko.observable('Sunday');
-     this.oferts=ko.observableArray([
-     	]);
-
-       let ogloszenia=[];
+     this.oferts=[];
+     self.counter=ko.observable(0);
        $.ajax({
         type:"GET",
          url:'data.xml',
-         async: true,
+         async: false,
         dataType: 'xml',
         success: function(response){
           let MainXml=$(response).find('payload').text();
@@ -23,7 +21,7 @@ $(document).ready(function(){
             let id=$(this).find('PositionNumberPL').text();
             let zawod=$(this).find('ProfileName').text();
              let oferta = new Oferta(id, zawod);
-             ogloszenia.push(oferta);
+             self.oferts.push(oferta);
              console.log(oferta);
           });
           console.log("xml loaded successfull");
@@ -33,7 +31,14 @@ $(document).ready(function(){
         }
      });
       console.log("oferta: ")
-  		
+  		self.incrementCounter= function () {
+            var previousCount = self.counter();
+            self.counter(previousCount + 1);
+        };
+
+        self.visibleStatus=ko.pureComputed(function(number){
+          return self.counter() < number? "hideOfert" : "as";
+        });
   };
 
 

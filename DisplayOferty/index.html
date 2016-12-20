@@ -20,10 +20,12 @@
 	<title>Displayer</title>
 	</head>
 <body>
+<button data-bind="click: incrementCounter">Click me</button>
+<div data-bind="text: counter"></div>
 	<div class="container">
 		<h2>oferty</h2>
 		<div class="row" data-bind="foreach: oferts">
-			<div class="col-sm-4 oferta">
+			<div class="col-sm-4 oferta" data-bind="css: {hideOfert: $index()+3*$parent.counter() > 2}">
 				<h3 data-bind="text: name"></h3>
 				<div class="dane">
 					<span class="tytul">Nr oferty: </span>
@@ -31,7 +33,7 @@
 				</div>
 				<div class="dane">
 					<span class="tytul">Kod zawodu: </span>
-					<span class="texting" data-bind="text: zawod">54478</span>
+					<span class="texting" data-bind="text: zawod"></span>
 				</div>
 				<div class="dane">
 					<span class="tytul">Wymagania: </span>
