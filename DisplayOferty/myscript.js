@@ -4,11 +4,16 @@ $(document).ready(function(){
     self.name = name;
     self.zawod = zawod;
 }
+
   function viewModel() {
       let self=this;
      this.dayOfWeek = ko.observable('Sunday');
      this.oferts=[];
      self.counter=ko.observable(0);
+let refreschCounter=setInterval(function(){
+  self.incrementCounter();
+},3000);
+
        $.ajax({
         type:"GET",
          url:'data.xml',
@@ -33,6 +38,9 @@ $(document).ready(function(){
       console.log("oferta: ")
   		self.incrementCounter= function () {
             var previousCount = self.counter();
+            if(previousCount>4)
+              self.counter(0);
+            else
             self.counter(previousCount + 1);
         };
 
