@@ -12,10 +12,10 @@ $(document).ready(function(){
      this.dayOfWeek = ko.observable('Sunday');
      this.oferts=[];
      self.counter=ko.observable(0);
-
 let refreschCounter=setInterval(function(){
   self.incrementCounter();
-
+  $(".oferta").css("display", "none")
+  $(".s_"+self.counter()).css("display", "block");
 },3000);
 
        $.ajax({
@@ -42,7 +42,7 @@ let refreschCounter=setInterval(function(){
       console.log("oferta: ")
   		self.incrementCounter= function () {
             var previousCount = self.counter();
-            if(previousCount>4){
+            if(previousCount+1>=self.oferts.length/3){
                $("h2").css("color", "red");
               self.counter(0);
             }
@@ -54,16 +54,7 @@ let refreschCounter=setInterval(function(){
           return self.counter() < number? "hideOfert" : "as";
         });
 
-        $(".s1").css("color", "blue");
-
-        self.gridViewModel= new ko.simpleGrid.viewModel({
-          data: self.oferts,
-          columns:[
-            {headerText:"Id", rowText:"name"},
-            {headerText:"zawod",rowText:"zawod"}
-          ],
-          pageSize: 3
-        });
+        
   };
 
 
