@@ -17,6 +17,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="myscript.js"></script>
 	<script type='text/javascript' src='application.js'></script>
+	<script type='text/javascript' src='knockout.simpleGrid.1.3.js'></script>
 	<title>Displayer</title>
 	</head>
 <body>
@@ -25,7 +26,7 @@
 	<div class="container">
 		<h2>oferty</h2>
 		<div class="row" data-bind="foreach: oferts">
-			<div class="col-sm-4 oferta" data-bind="css: {hideOfert: $index()+3*$parent.counter() > 2}">
+			<div class="col-sm-4 oferta" data-bind="css: {'hideOfert': $index()+3*$parent.counter() > 2}">
 				<h3 data-bind="text: name"></h3>
 				<div class="dane">
 					<span class="tytul">Nr oferty: </span>
@@ -49,8 +50,11 @@
 	<p>The day of the week is <span data-bind="text: dayOfWeek"></span>.</p>
 	<div data-bind="foreach: oferts">
 		<div>
-			<span>dddd</span>
+			<span data-bind="attr: {'str': 's'+Math.floor($index()/3)">dddd</span>
 		</div>
+	</div>
+
+	<div data-bind="simpleGrid: gridViewModel">
 	</div>
 </body>
 
