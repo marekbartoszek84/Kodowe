@@ -5,8 +5,6 @@ $(document).ready(function(){
     self.zawod = zawod;
 }
 
-
-
   function viewModel() {
       let self=this;
      this.dayOfWeek = ko.observable('Sunday');
