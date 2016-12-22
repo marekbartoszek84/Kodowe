@@ -1,10 +1,29 @@
 
+ html { 
+    height:100%;
+}
+ body {
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, green, white); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, green, white); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, green, white); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, green, white); /* Standard syntax */
+  min-height:100%;
+}
+.container{
+	
+}
 h2{
-color: blue;
+text-align: center;
+}
+h3{
+	margin-top:0px!important;
 }
 .oferta{
 	border:solid 1px black;
-	
+	margin-right:3%;
+	padding: 1%;
+	background: #e6ffcc;
 }
 .tytul{
 	font-weight: bold;
@@ -12,4 +31,8 @@ color: blue;
 
 .hideOfert{
 	display:none;
+}
+
+.col-sm-4{
+	width:30%!important;
 }

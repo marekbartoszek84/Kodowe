@@ -25,14 +25,14 @@
 	<div class="container">
 		<h2>oferty</h2>
 		<div class="row" data-bind="foreach: oferts">
-			<div class="col-sm-4 oferta" data-bind="attr: {class: 'col-sm-4 oferta '+'s_'+Math.floor($index()/3)}">
+			<div class="col-sm-4 oferta" data-bind="attr: {class: 'col-sm-4 hideOfert oferta '+'s_'+Math.floor($index()/3)}">
 				<h3 data-bind="text: name"></h3>
 				<div class="dane">
 					<span class="tytul">Nr oferty: </span>
-					<span class="texting">Ofpr/34.3443</span>
+					<span class="texting" data-bind="text: number"></span>
 				</div>
 				<div class="dane">
-					<span class="tytul">Kod zawodu: </span>
+					<span class="tytul">Zawód: </span>
 					<span class="texting" data-bind="text: zawod"></span>
 				</div>
 				<div class="dane">
@@ -41,20 +41,13 @@
 				</div>
 				<div class="dane">
 					<span class="tytul">Wynagrodzenie: </span>
-					<span class="texting">1800 zł</span>
+					<span class="texting" data-bind="text: placa+'zł'"></span>
 				</div>
 			</div>
 		</div>
 	</div>
 	<p>The day of the week is <span data-bind="text: dayOfWeek"></span>.</p>
-	<div data-bind="foreach: oferts">
-		<div class='of'>
-			<span data-bind="attr: {class: 's_' + Math.floor($index()/3)}">dddd</span>
-		</div>
-	</div>
 
-	<a href="#" data-bind="css: {str:true}">test
-	</a>
 </body>
 
 </html>

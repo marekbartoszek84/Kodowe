@@ -1,8 +1,10 @@
 $(document).ready(function(){
-  function Oferta(name, zawod) {
+  function Oferta(name,number, zawod,placa) {
     var self = this;
-    self.name = name;
+    self.name=name;
+    self.number = number;
     self.zawod = zawod;
+    self.placa=placa;
 }
 
   function viewModel() {
@@ -12,8 +14,17 @@ $(document).ready(function(){
      self.counter=ko.observable(0);
 let refreschCounter=setInterval(function(){
   self.incrementCounter();
-  $(".oferta").css("display", "none")
-  $(".s_"+self.counter()).css("display", "block");
+ // $(".oferta").css("display", "none")
+ if (self.counter()>0){
+     $(".s_"+(self.counter()-1)).addClass("hideOfert");
+     console.log("hide previous ofert");
+}
+else{
+  console.log("hiding oferts number:" + self.oferts.length/3);
+  $(".s_"+(Math.floor(self.oferts.length/3))).addClass("hideOfert");
+  }
+
+  $(".s_"+self.counter()).toggleClass("hideOfert");
 },3000);
 
        $.ajax({
@@ -25,12 +36,15 @@ let refreschCounter=setInterval(function(){
           let MainXml=$(response).find('payload').text();
           let xmlDoc=$.parseXML(MainXml);
           let MainOferts =$(xmlDoc).find('PositionOpening').find('PositionProfile').each(function(){
+            let name=$(this).find('ProfileName').text();
             let id=$(this).find('PositionNumberPL').text();
-            let zawod=$(this).find('ProfileName').text();
-             let oferta = new Oferta(id, zawod);
+            let zawod=$(this).find('PositionTitle').text();
+            let placa=$(this).find('BasePayAmountMin').text();
+             let oferta = new Oferta(name, id, zawod, placa);
              self.oferts.push(oferta);
-             console.log(oferta);
+             console.log(oferta+" "+self.counter());
           });
+
           console.log("xml loaded successfull");
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
@@ -41,7 +55,6 @@ let refreschCounter=setInterval(function(){
   		self.incrementCounter= function () {
             var previousCount = self.counter();
             if(previousCount+1>=self.oferts.length/3){
-               $("h2").css("color", "red");
               self.counter(0);
             }
             else
