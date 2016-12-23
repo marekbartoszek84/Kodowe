@@ -19,16 +19,26 @@
 	<script src="myscript.js"></script>
 	<title>Displayer</title>
 	</head>
-<body>
-<button data-bind="click: incrementCounter">Click me</button>
-<div data-bind="text: counter"></div>
+<body>	
 	<div class="container">
-		<h2>oferty</h2>
+		<header>
+			<div class="welcome">
+				Dziś 
+				<span class="day"></span>
+				Witamy w Powiatowym Urzędzie pracy w Lęborku
+			</div>
+			<div class ="clocker">
+				<span class="hours"></span> :
+				<span class="minutes"></span> :
+				<span class="seconds"></span> 
+			</div>
+		</header>	
+		<h2>Oferty pracy</h2>
 		<div class="row" data-bind="foreach: oferts">
 			<div class="col-sm-4 oferta" data-bind="attr: {class: 'col-sm-4 hideOfert oferta '+'s_'+Math.floor($index()/3)}">
 				<h3 data-bind="text: name"></h3>
 				<div class="dane">
-					<span class="tytul">Nr oferty: </span>
+					<span class="tytul">Nr stanowiska pracy: </span>
 					<span class="texting" data-bind="text: number"></span>
 				</div>
 				<div class="dane">
@@ -36,12 +46,24 @@
 					<span class="texting" data-bind="text: zawod"></span>
 				</div>
 				<div class="dane">
+					<span class="tytul">Zakres obowiązków: </span>
+					<span class="texting" data-bind="text: obowiazki"></span>
+				</div>
+				<div class="dane">
+					<span class="tytul">Pracodawca: </span>
+					<span class="texting" data-bind="text: pracodawca"></span>
+				</div>
+				<div class="dane">
 					<span class="tytul">Wymagania: </span>
 					<span class="texting">brak</span>
 				</div>
 				<div class="dane">
-					<span class="tytul">Wynagrodzenie: </span>
+					<span class="tytul">Wynagrodzenie od: </span>
 					<span class="texting" data-bind="text: placa+'zł'"></span>
+				</div>
+				<div class="dane">
+					<span class="tytul">Telefon kontaktowy: </span>
+					<span class="texting" data-bind="text: telefon"></span>
 				</div>
 			</div>
 		</div>

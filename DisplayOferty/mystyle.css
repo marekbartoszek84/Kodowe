@@ -11,19 +11,37 @@
   min-height:100%;
 }
 .container{
-	
+
 }
 h2{
 text-align: center;
+font-weight: bold!important;
+padding-bottom: 10px;
+width: 100%;
 }
 h3{
 	margin-top:0px!important;
+	font-weight: bold!important;
+	text-align:center;
+	border-bottom: dashed 1px black!important;
+	padding-bottom: 9px!important;
+}
+header{
+	width:100%!important;
 }
 .oferta{
 	border:solid 1px black;
 	margin-right:3%;
 	padding: 1%;
 	background: #e6ffcc;
+	border-radius: 10px;
+}
+
+.welcome{
+	font-weight: bold;
+	font-size:1.5em;
+	width:90%;
+	float:left;
 }
 .tytul{
 	font-weight: bold;
@@ -35,4 +53,17 @@ h3{
 
 .col-sm-4{
 	width:30%!important;
+}
+
+.clocker{
+	display:block;
+	background: white;
+	width: 9%;
+	border: solid 1px black;
+	float:left;
+}
+.clocker span{
+	font-weight: bold;
+	font-size:1.5em;
+
 }

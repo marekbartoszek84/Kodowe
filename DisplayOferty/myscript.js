@@ -1,10 +1,25 @@
+function addZeroToTimeNumber(timeStamp){
+  if(timeStamp<10)
+    return "0"+timeStamp;
+  else
+    return timeStamp;
+}
+function getWeakDay(dayNumber){
+  let dayNames=[ "Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
+  return dayNames[dayNumber];
+
+}
+
 $(document).ready(function(){
-  function Oferta(name,number, zawod,placa) {
+  function Oferta(name,number, zawod,obowiazki, pracodawca, placa, telefon) {
     var self = this;
     self.name=name;
     self.number = number;
     self.zawod = zawod;
-    self.placa=placa;
+    self.obowiazki = obowiazki;
+    self.pracodawca= pracodawca;
+    self.placa= placa;
+    self.telefon=telefon;
 }
 
   function viewModel() {
@@ -12,20 +27,33 @@ $(document).ready(function(){
      this.dayOfWeek = ko.observable('Sunday');
      this.oferts=[];
      self.counter=ko.observable(0);
-let refreschCounter=setInterval(function(){
-  self.incrementCounter();
- // $(".oferta").css("display", "none")
- if (self.counter()>0){
-     $(".s_"+(self.counter()-1)).addClass("hideOfert");
-     console.log("hide previous ofert");
-}
-else{
-  console.log("hiding oferts number:" + self.oferts.length/3);
-  $(".s_"+(Math.floor(self.oferts.length/3))).addClass("hideOfert");
-  }
 
-  $(".s_"+self.counter()).toggleClass("hideOfert");
-},3000);
+     let refreshClocker=setInterval(function(){
+        let time=new Date();
+        $(".hours").html(time.getHours()); 
+
+        $(".minutes").html(addZeroToTimeNumber(time.getMinutes()));
+
+        $(".seconds").html(addZeroToTimeNumber(time.getSeconds()));
+
+        $(".day").html(getWeakDay(time.getDay())+'--'+time.getDate()+"-"+(time.getMonth()+1)+"-"+time.getFullYear());
+        
+
+     },000);
+
+     let refreschCounter=setInterval(function(){
+       self.incrementCounter();
+       if (self.counter()>0){
+          $(".s_"+(self.counter()-1)).addClass("hideOfert");
+          console.log("hide previous ofert");
+        }
+       else{
+          console.log("hiding oferts number:" + self.oferts.length/3);
+          $(".s_"+(Math.floor(self.oferts.length/3))).addClass("hideOfert");
+        }
+
+        $(".s_"+self.counter()).toggleClass("hideOfert");
+      },3000);
 
        $.ajax({
         type:"GET",
@@ -39,8 +67,12 @@ else{
             let name=$(this).find('ProfileName').text();
             let id=$(this).find('PositionNumberPL').text();
             let zawod=$(this).find('PositionTitle').text();
+            let obowiazki=$(this).find('ObligationRange_PL').text();
+            let pracodawca=$(this).find('OrganizationName').text();
             let placa=$(this).find('BasePayAmountMin').text();
-             let oferta = new Oferta(name, id, zawod, placa);
+            let telefon=$(this).find('ContactName').find('FormattedNumber').text();
+
+             let oferta = new Oferta(name, id, zawod, obowiazki,  pracodawca, placa, telefon);
              self.oferts.push(oferta);
              console.log(oferta+" "+self.counter());
           });
