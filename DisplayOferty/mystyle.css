@@ -66,9 +66,17 @@ header{
 	background: white;
 	width: 9%;
 	float:left;
+	margin-top:1%!important;
 }
 .clocker span{
 	font-weight: bold;
 	font-size:1.5em;
+}
+
+.pageNumber{
+	background-color: white;
+	position:fixed;
+	bottom:10%;
+	font-weight: bold;
 
 }
