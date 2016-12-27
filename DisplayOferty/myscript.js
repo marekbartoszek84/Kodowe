@@ -7,11 +7,16 @@ function addZeroToTimeNumber(timeStamp){
 function getWeakDay(dayNumber){
   let dayNames=[ "Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
   return dayNames[dayNumber];
+}
 
+function checkPerHoursRent(payment){
+  if(payment<100.00)
+    return payment+"zł za godzinę";
+  return payment+"zł";
 }
 
 $(document).ready(function(){
-  function Oferta(name,number, zawod,obowiazki, pracodawca, placa, telefon) {
+  function Oferta(name,number, zawod,obowiazki, pracodawca, placa, telefon, email) {
     var self = this;
     self.name=name;
     self.number = number;
@@ -20,6 +25,7 @@ $(document).ready(function(){
     self.pracodawca= pracodawca;
     self.placa= placa;
     self.telefon=telefon;
+    self.email=email;
 }
 
   function viewModel() {
@@ -37,7 +43,7 @@ $(document).ready(function(){
 
         $(".seconds").html(addZeroToTimeNumber(time.getSeconds()));
 
-        $(".day").html(getWeakDay(time.getDay())+'--'+time.getDate()+"-"+(time.getMonth()+1)+"-"+time.getFullYear());
+        $(".day").html(getWeakDay(time.getDay())+' '+time.getDate()+"-"+(time.getMonth()+1)+"-"+time.getFullYear());
         
 
      },000);
@@ -54,7 +60,7 @@ $(document).ready(function(){
         }
 
         $(".s_"+self.counter()).toggleClass("hideOfert");*/
-      },3000);
+      },2000);
 
        $.ajax({
         type:"GET",
@@ -70,10 +76,10 @@ $(document).ready(function(){
             let zawod=$(this).find('PositionTitle').text();
             let obowiazki=$(this).find('ObligationRange_PL').text();
             let pracodawca=$(this).find('OrganizationName').text();
-            let placa=$(this).find('BasePayAmountMin').text();
+            let placa=checkPerHoursRent($(this).find('BasePayAmountMin').text());
             let telefon=$(this).find('ContactName').find('FormattedNumber').text();
-
-             let oferta = new Oferta(name, id, zawod, obowiazki,  pracodawca, placa, telefon);
+            let email=$(this).find('InternetEmailAddress').text();
+             let oferta = new Oferta(name, id, zawod, obowiazki,  pracodawca, placa, telefon, email);
              self.oferts.push(oferta);
              self.pagesNumber=Math.floor(self.oferts.length/3)+1;
              console.log(oferta+" "+self.counter());

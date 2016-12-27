@@ -30,7 +30,7 @@ h3{
 header{
 	width:100%!important;
 	float:left;
-	background: #e6ffcc;
+	border-bottom:dashed 1px;
 }
 .oferta{
 	border:solid 1px black;
@@ -63,10 +63,9 @@ header{
 
 .clocker{
 	display:block;
-	background: white;
 	width: 9%;
 	float:left;
-	margin-top:1%!important;
+	margin-top:1.5%!important;
 }
 .clocker span{
 	font-weight: bold;
