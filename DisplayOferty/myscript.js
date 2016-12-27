@@ -27,6 +27,7 @@ $(document).ready(function(){
      this.dayOfWeek = ko.observable('Sunday');
      this.oferts=[];
      self.counter=ko.observable(0);
+     self.pagesNumber=ko.observable(0);
 
      let refreshClocker=setInterval(function(){
         let time=new Date();
@@ -43,7 +44,7 @@ $(document).ready(function(){
 
      let refreschCounter=setInterval(function(){
        self.incrementCounter();
-       if (self.counter()>0){
+      /* if (self.counter()>0){
           $(".s_"+(self.counter()-1)).addClass("hideOfert");
           console.log("hide previous ofert");
         }
@@ -52,7 +53,7 @@ $(document).ready(function(){
           $(".s_"+(Math.floor(self.oferts.length/3))).addClass("hideOfert");
         }
 
-        $(".s_"+self.counter()).toggleClass("hideOfert");
+        $(".s_"+self.counter()).toggleClass("hideOfert");*/
       },3000);
 
        $.ajax({
@@ -74,6 +75,7 @@ $(document).ready(function(){
 
              let oferta = new Oferta(name, id, zawod, obowiazki,  pracodawca, placa, telefon);
              self.oferts.push(oferta);
+             self.pagesNumber=Math.floor(self.oferts.length/3)+1;
              console.log(oferta+" "+self.counter());
           });
 

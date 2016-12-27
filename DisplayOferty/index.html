@@ -25,7 +25,7 @@
 			<div class="welcome">
 				Dziś 
 				<span class="day"></span>
-				Witamy w Powiatowym Urzędzie pracy w Lęborku
+				Witamy w Powiatowym Urzędzie Pracy w Lęborku
 			</div>
 			<div class ="clocker">
 				<span class="hours"></span> :
@@ -33,9 +33,9 @@
 				<span class="seconds"></span> 
 			</div>
 		</header>	
-		<h2>Oferty pracy</h2>
+		<h2>Oferty pracy:</h2>
 		<div class="row" data-bind="foreach: oferts">
-			<div class="col-sm-4 oferta" data-bind="attr: {class: 'col-sm-4 hideOfert oferta '+'s_'+Math.floor($index()/3)}">
+			<div class="col-sm-4 oferta" data-bind="attr: {class: 'col-sm-4 oferta hideOfert '+'s_'+Math.floor($index()/3)}, css:{firstClass: Math.floor($index()/3)==$parent.counter()}">
 				<h3 data-bind="text: name"></h3>
 				<div class="dane">
 					<span class="tytul">Nr stanowiska pracy: </span>
@@ -67,8 +67,11 @@
 				</div>
 			</div>
 		</div>
+		<div class="pageNumber">
+			Str <span data-bind="text: counter()+1"></span> / 
+			<span data-bind="text: pagesNumber"></span>
+		</div>
 	</div>
-	<p>The day of the week is <span data-bind="text: dayOfWeek"></span>.</p>
 
 </body>
 
