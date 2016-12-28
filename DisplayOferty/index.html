@@ -36,10 +36,14 @@
 		<h2>Oferty pracy:</h2>
 		<div class="row" data-bind="foreach: oferts">
 			<div class="col-sm-4 oferta" data-bind="attr: {class: 'col-sm-4 oferta hideOfert '+'s_'+Math.floor($index()/3)}, css:{firstClass: Math.floor($index()/3)==$parent.counter()}">
-				<h3 data-bind="text: name"></h3>
+				<h3 data-bind="text: name, css:{subsydiowana: zamknieta>0}"></h3>
 				<div class="dane">
 					<span class="tytul">Nr stanowiska pracy: </span>
 					<span class="texting" data-bind="text: number"></span>
+				</div>
+				<div class="dane">
+					<span class="tytul">Oerta subsydiowana: </span>
+					<span class="texting" data-bind="text: zamknieta"></span>
 				</div>
 				<div class="dane">
 					<span class="tytul">Zawód: </span>
@@ -55,7 +59,9 @@
 				</div>
 				<div class="dane">
 					<span class="tytul">Wymagania: </span>
-					<span class="texting">brak</span>
+					<span class="texting" data-bind="foreach: wymagania">
+						<p class="skill" data-bind="text: '- '+$data"> </p>
+					</span>
 				</div>
 				<div class="dane">
 					<span class="tytul">Wynagrodzenie od: </span>

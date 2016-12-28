@@ -16,16 +16,18 @@ function checkPerHoursRent(payment){
 }
 
 $(document).ready(function(){
-  function Oferta(name,number, zawod,obowiazki, pracodawca, placa, telefon, email) {
+  function Oferta(name,number,zamknieta, zawod,obowiazki, pracodawca, placa, telefon, email,wymagania) {
     var self = this;
     self.name=name;
     self.number = number;
+    self.zamknieta=zamknieta;
     self.zawod = zawod;
     self.obowiazki = obowiazki;
     self.pracodawca= pracodawca;
     self.placa= placa;
     self.telefon=telefon;
     self.email=email;
+    self.wymagania=wymagania;
 }
 
   function viewModel() {
@@ -60,7 +62,7 @@ $(document).ready(function(){
         }
 
         $(".s_"+self.counter()).toggleClass("hideOfert");*/
-      },2000);
+      },4000);
 
        $.ajax({
         type:"GET",
@@ -73,13 +75,21 @@ $(document).ready(function(){
           let MainOferts =$(xmlDoc).find('PositionOpening').find('PositionProfile').each(function(){
             let name=$(this).find('ProfileName').text();
             let id=$(this).find('PositionNumberPL').text();
+            let zamknieta=$(this).find('CzyZamknieta').text();
+
             let zawod=$(this).find('PositionTitle').text();
             let obowiazki=$(this).find('ObligationRange_PL').text();
             let pracodawca=$(this).find('OrganizationName').text();
             let placa=checkPerHoursRent($(this).find('BasePayAmountMin').text());
             let telefon=$(this).find('ContactName').find('FormattedNumber').text();
             let email=$(this).find('InternetEmailAddress').text();
-             let oferta = new Oferta(name, id, zawod, obowiazki,  pracodawca, placa, telefon, email);
+            let wymagania=[];
+            $(this).find('SkillDescription').each(function(){
+                wymagania.push($(this).text());
+            });
+
+           // let wymagania=$(this).find('SkillDescription').text();
+            let oferta = new Oferta(name, id, zamknieta, zawod, obowiazki,  pracodawca, placa, telefon, email, wymagania);
              self.oferts.push(oferta);
              self.pagesNumber=Math.floor(self.oferts.length/3)+1;
              console.log(oferta+" "+self.counter());
