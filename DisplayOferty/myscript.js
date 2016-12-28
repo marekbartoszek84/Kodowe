@@ -15,8 +15,13 @@ function checkPerHoursRent(payment){
   return payment+"zł";
 }
 
+function createAddress(code, city,street, number){
+  let postCode=code.substring(0,2)+"-"+code.substring(2,5);
+  return city+", ul.  "+street+" "+number+", "+postCode;
+}
+
 $(document).ready(function(){
-  function Oferta(name,number,zamknieta, zawod,obowiazki, pracodawca, placa, telefon, email,wymagania) {
+  function Oferta(name,number,zamknieta, zawod,obowiazki, pracodawca, placa, adres, telefon, email,wymagania) {
     var self = this;
     self.name=name;
     self.number = number;
@@ -25,6 +30,7 @@ $(document).ready(function(){
     self.obowiazki = obowiazki;
     self.pracodawca= pracodawca;
     self.placa= placa;
+    self.adres=adres;
     self.telefon=telefon;
     self.email=email;
     self.wymagania=wymagania;
@@ -81,6 +87,26 @@ $(document).ready(function(){
             let obowiazki=$(this).find('ObligationRange_PL').text();
             let pracodawca=$(this).find('OrganizationName').text();
             let placa=checkPerHoursRent($(this).find('BasePayAmountMin').text());
+            let tempAddress=$(this).find('ContactMethod').find('PostalAddress');
+
+          /*  $.ajax({
+              type:"GET",
+              url:'SIMC.xml',
+              async: false,
+              dataType: 'xml',
+              success: function(response2){
+                let xml2=$.parseXML(response2);
+                $(this).find('row').each(function(){
+                  if($(this).attr('SYMPOD').tex()=='0977373'){
+                    console.log("successssfulll");
+                  }
+                });
+              }
+
+            });*/
+            let adres=createAddress(tempAddress.find('PostalCode').text(),
+              tempAddress.find('Municipality').text(), tempAddress.find('StreetName').text(),
+              tempAddress.find('BuildingNumber').text());
             let telefon=$(this).find('ContactName').find('FormattedNumber').text();
             let email=$(this).find('InternetEmailAddress').text();
             let wymagania=[];
@@ -89,7 +115,7 @@ $(document).ready(function(){
             });
 
            // let wymagania=$(this).find('SkillDescription').text();
-            let oferta = new Oferta(name, id, zamknieta, zawod, obowiazki,  pracodawca, placa, telefon, email, wymagania);
+            let oferta = new Oferta(name, id, zamknieta, zawod, obowiazki,  pracodawca, placa, adres, telefon, email, wymagania);
              self.oferts.push(oferta);
              self.pagesNumber=Math.floor(self.oferts.length/3)+1;
              console.log(oferta+" "+self.counter());

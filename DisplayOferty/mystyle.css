@@ -87,5 +87,8 @@ header{
 }
 
 .subsydiowana{
-	background-color: red!important;
+	background: url('img/padlock.png');
+	background-repeat: no-repeat;
+	background-position: 95% 15%;
+	background-size: 7% 55%;
 }
