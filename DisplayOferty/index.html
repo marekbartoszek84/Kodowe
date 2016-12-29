@@ -23,13 +23,12 @@
 	<div class="container">
 		<header>
 			<div class="welcome">
-				Dziś 
+				Witamy w Powiatowym Urzędzie Pracy w Lęborku, dziś 
 				<span class="day"></span>
-				Witamy w Powiatowym Urzędzie Pracy w Lęborku
 			</div>
 			<div class ="clocker">
-				<span class="hours"></span> :
-				<span class="minutes"></span> :
+				<span class="hours"></span>
+				<span class="minutes"></span>
 				<span class="seconds"></span> 
 			</div>
 		</header>	
@@ -45,10 +44,6 @@
 					<span class="tytul">Oerta subsydiowana - dla zarejestrowanych </span>
 				</div>
 				<div class="dane">
-					<span class="tytul">Zawód: </span>
-					<span class="texting" data-bind="text: zawod"></span>
-				</div>
-				<div class="dane">
 					<span class="tytul">Zakres obowiązków: </span>
 					<span class="texting" data-bind="text: obowiazki"></span>
 				</div>
@@ -56,7 +51,7 @@
 					<span class="tytul">Pracodawca: </span>
 					<span class="texting" data-bind="text: pracodawca"></span>
 				</div>
-				<div class="dane">
+				<div class="dane" data-bind="visible: wymagania!=''">
 					<span class="tytul">Wymagania: </span>
 					<span class="texting" data-bind="foreach: wymagania">
 						<p class="skill" data-bind="text: '- '+$data"> </p>
@@ -70,11 +65,11 @@
 					<span class="tytul">Adres pracodawcy: </span>
 					<span class="texting" data-bind="text: adres"></span>
 				</div>
-				<div class="dane">
+				<div class="dane" data-bind="visible: telefon!=''">
 					<span class="tytul">Telefon kontaktowy: </span>
 					<span class="texting" data-bind="text: telefon"></span>
 				</div>
-				<div class="dane">
+				<div class="dane" data-bind="visible: email!=''">
 					<span class="tytul">E-mail: </span>
 					<span class="texting" data-bind="text: email"></span>
 				</div>
@@ -83,8 +78,8 @@
 		<div class="pageNumber">
 			Str <span data-bind="text: counter()+1"></span> / 
 			<span data-bind="text: pagesNumber"></span>
+			<span class="commercial">to jest miejsce na Twoją reklamę! :)</span>
 		</div>
-		<button data-bind="">get city</button>
 	</div>
 
 </body>

@@ -27,6 +27,9 @@ h3{
 	border-bottom: dashed 1px black!important;
 	padding-bottom: 9px!important;
 }
+h3::first-letter{
+	text-transform: uppercase;
+}
 header{
 	width:100%!important;
 	float:left;
@@ -38,6 +41,7 @@ header{
 	padding: 1%;
 	background: #e6ffcc;
 	border-radius: 10px;
+	box-shadow: 10px 10px 5px grey;
 }
 
 .welcome{
@@ -66,20 +70,30 @@ header{
 	width: 9%;
 	float:left;
 	margin-top:1.5%!important;
+	background-color:#e6ffcc;
+	border-radius: 10px;
+	border-radius: 4px;
+	padding-left: 0.3%;
 }
 .clocker span{
 	font-weight: bold;
 	font-size:1.5em;
+
+
 }
 
 .pageNumber{
 	background-color: white;
 	position:fixed;
-	bottom:10%;
+	bottom:1%;
 	font-weight: bold;
+	width: 100%;
 
 }
-
+.commercial{
+	background: #e6ffcc!important;
+	margin-left:30%;
+}
 .skill{
 	margin:0px;
 	padding:0.5%;
@@ -91,4 +105,5 @@ header{
 	background-repeat: no-repeat;
 	background-position: 95% 15%;
 	background-size: 7% 55%;
+	border:dashed 1px red;
 }

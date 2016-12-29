@@ -5,7 +5,7 @@ function addZeroToTimeNumber(timeStamp){
     return timeStamp;
 }
 function getWeakDay(dayNumber){
-  let dayNames=[ "Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
+  let dayNames=[ "niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "iątek", "sobota"];
   return dayNames[dayNumber];
 }
 
@@ -17,7 +17,7 @@ function checkPerHoursRent(payment){
 
 function createAddress(code, city,street, number){
   let postCode=code.substring(0,2)+"-"+code.substring(2,5);
-  return city+", ul.  "+street+" "+number+", "+postCode;
+  return city+" "+street+" "+number+", "+postCode;
 }
 
 function City(code, name){
@@ -25,6 +25,13 @@ function City(code, name){
   this.name=name;
 }
 
+function compareCityAndStreet(city,street)
+{
+  if(city.localeCompare(street)==0)
+    return "";
+  else
+    return "ul. "+street;
+}
 
 function processData(allText) {
     var allTextLines = allText.split(/\r\n|\n/);
@@ -45,25 +52,10 @@ function processData(allText) {
     //console.log("Load success.."+lines);
     return lines;
     }
-function findCode(number){
-  console.log("search code..");
-  return number;
-}
+
 
 
 $(document).ready(function(){
-  let kody=[];
-      $.ajax({
-        type: "GET",
-        url: "miejscowosci.csv",
-        dataType: "text",
-        success: function(data) {
-          kody=processData(data);
-
-        }
-     });
-
-
   function Oferta(name,number,zamknieta, zawod,obowiazki, pracodawca, placa, adres, telefon, email,wymagania) {
     var self = this;
     self.name=name;
@@ -83,14 +75,27 @@ $(document).ready(function(){
       let self=this;
      this.dayOfWeek = ko.observable('Sunday');
      this.oferts=[];
+     self.Cities=[];
      self.counter=ko.observable(0);
      self.pagesNumber=ko.observable(0);
 
+      $.ajax({
+        type: "GET",
+        url: "miejscowosci.csv",
+        dataType: "text",
+        async:false,
+        success: function(data) {
+          self.Cities=processData(data);
+        }
+     });
+
+
+
      let refreshClocker=setInterval(function(){
         let time=new Date();
-        $(".hours").html(time.getHours()); 
+        $(".hours").html(time.getHours()+":"); 
 
-        $(".minutes").html(addZeroToTimeNumber(time.getMinutes()));
+        $(".minutes").html(addZeroToTimeNumber(time.getMinutes())+":");
 
         $(".seconds").html(addZeroToTimeNumber(time.getSeconds()));
 
@@ -98,7 +103,15 @@ $(document).ready(function(){
         
 
      },000);
-
+      self.getCity =function(number){
+        var result = $.grep(self.Cities, function(e){ return e.code == parseInt(number); });
+        if(result.length>0){
+          return result[0].name;
+        }
+        else {
+          return "";
+        }
+      };
      let refreschCounter=setInterval(function(){
        self.incrementCounter();
       /* if (self.counter()>0){
@@ -132,27 +145,15 @@ $(document).ready(function(){
             let placa=checkPerHoursRent($(this).find('BasePayAmountMin').text());
             let tempAddress=$(this).find('ContactMethod').find('PostalAddress');
 
-             
-            let tempy=findCode(17);
-            console.log("kody : "+tempy);
-          /*  $.ajax({
-              type:"GET",
-              url:'SIMC.xml',
-              async: false,
-              dataType: 'xml',
-              success: function(response2){
-                let xml2=$.parseXML(response2);
-                $(this).find('row').each(function(){
-                  if($(this).attr('SYMPOD').tex()=='0977373'){
-                    console.log("successssfulll");
-                  }
-                });
-              }
+            let cityNumber =tempAddress.find('Municipality').text();
+            let cityName=self.getCity(cityNumber);
+            let cityStreet=compareCityAndStreet(cityName, tempAddress.find('StreetName').text());
 
-            });*/
             let adres=createAddress(tempAddress.find('PostalCode').text(),
-              tempAddress.find('Municipality').text(), tempAddress.find('StreetName').text(),
-              tempAddress.find('BuildingNumber').text());
+                      cityName, cityStreet, tempAddress.find('BuildingNumber').text());
+
+
+
             let telefon=$(this).find('ContactName').find('FormattedNumber').text();
             let email=$(this).find('InternetEmailAddress').text();
             let wymagania=[];
