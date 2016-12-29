@@ -20,7 +20,50 @@ function createAddress(code, city,street, number){
   return city+", ul.  "+street+" "+number+", "+postCode;
 }
 
+function City(code, name){
+  this.code=code;
+  this.name=name;
+}
+
+
+function processData(allText) {
+    var allTextLines = allText.split(/\r\n|\n/);
+    var headers = allTextLines[0].split(',');
+    var lines = [];
+
+    for (var i=1; i<allTextLines.length; i++) {
+        var data = allTextLines[i].split(',');
+        if (data.length == headers.length) {
+
+            var tarr = new City(data[0], data[1]);
+            //for (var j=0; j<headers.length; j++) {
+                //tarr.push(data[0]+":"+data[1]);
+            //}
+            lines.push(tarr);
+        }
+    }
+    //console.log("Load success.."+lines);
+    return lines;
+    }
+function findCode(number){
+  console.log("search code..");
+  return number;
+}
+
+
 $(document).ready(function(){
+  let kody=[];
+      $.ajax({
+        type: "GET",
+        url: "miejscowosci.csv",
+        dataType: "text",
+        success: function(data) {
+          kody=processData(data);
+
+        }
+     });
+
+
   function Oferta(name,number,zamknieta, zawod,obowiazki, pracodawca, placa, adres, telefon, email,wymagania) {
     var self = this;
     self.name=name;
@@ -89,6 +132,9 @@ $(document).ready(function(){
             let placa=checkPerHoursRent($(this).find('BasePayAmountMin').text());
             let tempAddress=$(this).find('ContactMethod').find('PostalAddress');
 
+             
+            let tempy=findCode(17);
+            console.log("kody : "+tempy);
           /*  $.ajax({
               type:"GET",
               url:'SIMC.xml',
@@ -118,10 +164,10 @@ $(document).ready(function(){
             let oferta = new Oferta(name, id, zamknieta, zawod, obowiazki,  pracodawca, placa, adres, telefon, email, wymagania);
              self.oferts.push(oferta);
              self.pagesNumber=Math.floor(self.oferts.length/3)+1;
-             console.log(oferta+" "+self.counter());
+             
           });
 
-          console.log("xml loaded successfull");
+          console.log("xml loaded successfull ");
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
           console.log("error! Loading xml faild");

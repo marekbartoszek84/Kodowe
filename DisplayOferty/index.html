@@ -41,9 +41,8 @@
 					<span class="tytul">Nr stanowiska pracy: </span>
 					<span class="texting" data-bind="text: number"></span>
 				</div>
-				<div class="dane">
-					<span class="tytul">Oerta subsydiowana: </span>
-					<span class="texting" data-bind="text: zamknieta"></span>
+				<div class="dane"  data-bind="visible: zamknieta>0">
+					<span class="tytul">Oerta subsydiowana - dla zarejestrowanych </span>
 				</div>
 				<div class="dane">
 					<span class="tytul">Zawód: </span>
@@ -85,6 +84,7 @@
 			Str <span data-bind="text: counter()+1"></span> / 
 			<span data-bind="text: pagesNumber"></span>
 		</div>
+		<button data-bind="">get city</button>
 	</div>
 
 </body>
