@@ -47,7 +47,7 @@
 					<span class="tytul">Zakres obowiązków: </span>
 					<span class="texting" data-bind="text: obowiazki"></span>
 				</div>
-				<div class="dane">
+				<div class="dane" data-bind="visible: zamknieta<1">
 					<span class="tytul">Pracodawca: </span>
 					<span class="texting" data-bind="text: pracodawca"></span>
 				</div>
@@ -61,7 +61,7 @@
 					<span class="tytul">Wynagrodzenie od: </span>
 					<span class="texting" data-bind="text: placa"></span>
 				</div>
-				<div class="dane">
+				<div class="dane" data-bind="visible: zamknieta<1">
 					<span class="tytul">Adres pracodawcy: </span>
 					<span class="texting" data-bind="text: adres"></span>
 				</div>
@@ -69,7 +69,7 @@
 					<span class="tytul">Telefon kontaktowy: </span>
 					<span class="texting" data-bind="text: telefon"></span>
 				</div>
-				<div class="dane" data-bind="visible: email!=''">
+				<div class="dane" data-bind="visible: (email!='' && zamknieta<1)">
 					<span class="tytul">E-mail: </span>
 					<span class="texting" data-bind="text: email"></span>
 				</div>

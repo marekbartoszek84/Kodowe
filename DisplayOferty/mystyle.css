@@ -31,6 +31,8 @@ h3::first-letter{
 	text-transform: uppercase;
 }
 header{
+	margin-top:2%;
+	padding-bottom: 1%;
 	width:100%!important;
 	float:left;
 	border-bottom:dashed 1px;

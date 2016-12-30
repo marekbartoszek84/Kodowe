@@ -5,7 +5,7 @@ function addZeroToTimeNumber(timeStamp){
     return timeStamp;
 }
 function getWeakDay(dayNumber){
-  let dayNames=[ "niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "iątek", "sobota"];
+  let dayNames=[ "niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota"];
   return dayNames[dayNumber];
 }
 
@@ -93,7 +93,7 @@ $(document).ready(function(){
 
      let refreshClocker=setInterval(function(){
         let time=new Date();
-        $(".hours").html(time.getHours()+":"); 
+        $(".hours").html(addZeroToTimeNumber(time.getHours())+":"); 
 
         $(".minutes").html(addZeroToTimeNumber(time.getMinutes())+":");
 
@@ -124,7 +124,7 @@ $(document).ready(function(){
         }
 
         $(".s_"+self.counter()).toggleClass("hideOfert");*/
-      },4000);
+      },8000);
 
        $.ajax({
         type:"GET",
