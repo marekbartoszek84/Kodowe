@@ -99,7 +99,7 @@ $(document).ready(function(){
 
         $(".seconds").html(addZeroToTimeNumber(time.getSeconds()));
 
-        $(".day").html(getWeakDay(time.getDay())+' '+time.getDate()+"-"+(time.getMonth()+1)+"-"+time.getFullYear());
+        $(".day").html(getWeakDay(time.getDay())+' '+addZeroToTimeNumber(time.getDate())+"-"+addZeroToTimeNumber(time.getMonth()+1)+"-"+time.getFullYear());
         
 
      },000);
